@@ -17,17 +17,23 @@ public class TrackerEnemy extends EnemyB{
 	}
 
 	public void tick() {
-		x += velX;
-		y += velY;
+		velX=5;
+		velY=5;
 		
 		//super complex AI which tracks the player and changes the enemy's velocity to move towards player
-		if(p.getX()==x) velX = 0;
-		else if(p.getX()>x) velX=5;
-		else velX=-5;
+		/*
+		if(p.getX()>x+5) x+=velX;
+		else if(p.getX()<x-5) x-=velX;
 		
-		if(p.getY()==y) velY = 0;
-		else if(p.getY()>y) velY=5;
-		else velY=-5;
+		if(p.getY()>y+5) y+=velY;
+		else if(p.getY()<y-5) y-=velY;
+		*/
+		
+		predictPlayer(p.getX(), p.getY(), p.getVelX(), p.getVelY());
+		
+		
+		
+		
 	}
 
 	public void render(Graphics g) {
@@ -37,6 +43,21 @@ public class TrackerEnemy extends EnemyB{
 
 	public Rectangle getHitBox() {
 		return new Rectangle (x+4, y+2, 34, 37);
+	}
+	
+	public void predictPlayer(int p_x, int p_y, int p_velX, int p_velY) {
+		
+		if(p_velX>0) p_x+=p_velX*4;
+		else if(p_velX<0) p_x-=p_velX*4;
+		
+		if(p_velY>0) p_y+=velY*4;
+		else if(p_velY<0) p_y-=velY*4;
+		
+		if(p_x>x+5) x+=velX;
+		else if(p_x<x-5) x-=velX;
+		
+		if(p_y>y+5) y+=velY;
+		else if(p_y<y-5) y-=velY;
 	}
 
 }
