@@ -17,17 +17,15 @@ public class BasicEnemy extends EnemyB{
 	}
 
 	public void tick() {
-		x += velX;
-		y += velY;
+		velX=5;
+		velY=5;
 		
 		//super complex AI which tracks the player and changes the enemy's velocity to move towards player
-		if(p.getX()==x) velX = 0;
-		else if(p.getX()>x) velX=5;
-		else velX=-5;
+		if(p.getX()>x+5) x+=velX;
+		else if(p.getX()<x-5) x-=velX;
 		
-		if(p.getY()==y) velY = 0;
-		else if(p.getY()>y) velY=5;
-		else velY=-5;
+		if(p.getY()>y+5) y+=velY;
+		else if(p.getY()<y-5) y-=velY;
 	}
 
 	public void render(Graphics g) {		
